@@ -1,0 +1,14 @@
+{
+  "theme_color": "#1975ff",
+  "background_color": "#f2f5f9",
+  "display": "standalone",
+  "start_url": ".",
+  "short_name": "Auditor",
+  "name": "IoT Auditor",
+  "icons": [
+    {
+      "src": "/logo_layer8.png",
+      "type": "image/png"
+    }
+  ]
+}

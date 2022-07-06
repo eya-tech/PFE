@@ -1,0 +1,292 @@
+{
+    "requirements" :[ 
+        {
+            "name" : "FR-1 : Identification and Authentication Control",
+            "commun_requirements" : [
+                {
+                    "name" : "CR-1 : Human user identification and authentication",
+                    "tests" : [
+                        {
+                            "test1" : "Authentication of human users on all Web interfaces. (SL1)",
+                            "test2" : "Unique authentication for every human user on all interfaces (eg. with username and password). (SL2)",
+                            "test3" : "Multifactor authentication for all human users. (SL3)"
+                            
+                        }
+                    ],
+                    "comment":"this is an addtionnal information"
+                },
+                {
+                    "name" : "CR-2 :  Software process and device identification and authentication ",
+                    "tests" : [
+                        {
+                            "test1" : "",
+                            "test2" : "",
+                            "test3" : ""
+                            
+                        }
+                    ],
+                    "comment":"this is an addtionnal information"
+                },
+                {
+                    "name" : "CR-1",
+                    "tests" : [
+                        {
+                            "test1" : "",
+                            "test2" : "",
+                            "test3" : ""
+                            
+                        }
+                    ],
+                    "comment":"this is an addtionnal information"
+                }
+            ]
+        },
+        {
+            "name" : "FR-2 : ",
+            "commun_requirements" : [
+                {
+                    "name" : "CR-1",
+                    "tests" : [
+                        {
+                            "test1" : "",
+                            "test2" : "",
+                            "test3" : ""
+                            
+                        }
+                    ],
+                    "comment":"this is an addtionnal information"
+                },
+                {
+                    "name" : "CR-1",
+                    "tests" : [
+                        {
+                            "test1" : "",
+                            "test2" : "",
+                            "test3" : ""
+                            
+                        }
+                    ],
+                    "comment":"this is an addtionnal information"
+                },
+                {
+                    "name" : "CR-1",
+                    "tests" : [
+                        {
+                            "test1" : "",
+                            "test2" : "",
+                            "test3" : ""
+                            
+                        }
+                    ],
+                    "comment":"this is an addtionnal information"
+                }
+            ]
+        },
+        {
+            "name" : "FR-3 : ",
+            "commun_requirements" : [
+                {
+                    "name" : "CR-1",
+                    "tests" : [
+                        {
+                            "test1" : "",
+                            "test2" : "",
+                            "test3" : ""
+                            
+                        }
+                    ],
+                    "comment":"this is an addtionnal information"
+                },
+                {
+                    "name" : "CR-1",
+                    "tests" : [
+                        {
+                            "test1" : "",
+                            "test2" : "",
+                            "test3" : ""
+                            
+                        }
+                    ],
+                    "comment":"this is an addtionnal information"
+                },
+                {
+                    "name" : "CR-1",
+                    "tests" : [
+                        {
+                            "test1" : "",
+                            "test2" : "",
+                            "test3" : ""
+                            
+                        }
+                    ],
+                    "comment":"this is an addtionnal information"
+                }
+            ]
+        },
+        {
+            "name" : "FR-4 : ",
+            "commun_requirements" : [
+                {
+                    "name" : "CR-1",
+                    "tests" : [
+                        {
+                            "test1" : "",
+                            "test2" : "",
+                            "test3" : ""
+                            
+                        }
+                    ],
+                    "comment":"this is an addtionnal information"
+                },
+                {
+                    "name" : "CR-1",
+                    "tests" : [
+                        {
+                            "test1" : "",
+                            "test2" : "",
+                            "test3" : ""
+                            
+                        }
+                    ],
+                    "comment":"this is an addtionnal information"
+                },
+                {
+                    "name" : "CR-1",
+                    "tests" : [
+                        {
+                            "test1" : "",
+                            "test2" : "",
+                            "test3" : ""
+                            
+                        }
+                    ],
+                    "comment":"this is an addtionnal information"
+                }
+            ]
+        },
+        {
+            "name" : "FR-5 : ",
+            "commun_requirements" : [
+                {
+                    "name" : "CR-1",
+                    "tests" : [
+                        {
+                            "test1" : "",
+                            "test2" : "",
+                            "test3" : ""
+                            
+                        }
+                    ],
+                    "comment":"this is an addtionnal information"
+                },
+                {
+                    "name" : "CR-1",
+                    "tests" : [
+                        {
+                            "test1" : "",
+                            "test2" : "",
+                            "test3" : ""
+                            
+                        }
+                    ],
+                    "comment":"this is an addtionnal information"
+                },
+                {
+                    "name" : "CR-1",
+                    "tests" : [
+                        {
+                            "test1" : "",
+                            "test2" : "",
+                            "test3" : ""
+                            
+                        }
+                    ],
+                    "comment":"this is an addtionnal information"
+                }
+            ]
+        },
+        {
+            "name" : "FR-6 : ",
+            "commun_requirements" : [
+                {
+                    "name" : "CR-1",
+                    "tests" : [
+                        {
+                            "test1" : "",
+                            "test2" : "",
+                            "test3" : ""
+                            
+                        }
+                    ],
+                    "comment":"this is an addtionnal information"
+                },
+                {
+                    "name" : "CR-1",
+                    "tests" : [
+                        {
+                            "test1" : "",
+                            "test2" : "",
+                            "test3" : ""
+                            
+                        }
+                    ],
+                    "comment":"this is an addtionnal information"
+                },
+                {
+                    "name" : "CR-1",
+                    "tests" : [
+                        {
+                            "test1" : "",
+                            "test2" : "",
+                            "test3" : ""
+                            
+                        }
+                    ],
+                    "comment":"this is an addtionnal information"
+                }
+            ]
+        },
+        {
+            "name" : "FR-7 : ",
+            "commun_requirements" : [
+                {
+                    "name" : "CR-1",
+                    "tests" : [
+                        {
+                            "test1" : "",
+                            "test2" : "",
+                            "test3" : ""
+                            
+                        }
+                    ],
+                    "comment":"this is an addtionnal information"
+                },
+                {
+                    "name" : "CR-1",
+                    "tests" : [
+                        {
+                            "test1" : "",
+                            "test2" : "",
+                            "test3" : ""
+                            
+                        }
+                    ],
+                    "comment":"this is an addtionnal information"
+                },
+                {
+                    "name" : "CR-1",
+                    "tests" : [
+                        {
+                            "test1" : "",
+                            "test2" : "",
+                            "test3" : ""
+                            
+                        }
+                    ],
+                    "comment":"this is an addtionnal information"
+                }
+            ]
+        }
+
+    ]
+}
