@@ -14,7 +14,7 @@ import * as Yup from 'yup';
 
 import { Formik } from 'formik';
 
-export default function FormDialog() {
+export default function FormDialog({setDeviceInfo}) {
     const [open, setOpen] = React.useState(true);
 
 
@@ -35,10 +35,10 @@ export default function FormDialog() {
           </DialogContentText>
           <Formik
             initialValues={{
-                name:"",
-                type:"",
-                manufacturer:"",
-                version:"",
+                name:"aaa",
+                type:"aaa",
+                manufacturer:"aaa",
+                version:"aaa",
                 submit: null
             }}
             validationSchema={Yup.object().shape({
@@ -55,13 +55,15 @@ export default function FormDialog() {
                         .max(255)
                         .required('The version field is required'),
             })}
-            onSubmit={async (values,{ setErrors, setStatus, setSubmitting})=> {
-                try{
+            onSubmit={async(values,{  setStatus, setSubmitting})=> {
+                if(values){
                     setStatus({ success: true });
+                    await setDeviceInfo(values)
+                    // console.log(deviceInfo.name)
                     setSubmitting(false);
-                }catch(err){
+                    handleClose()
+                }else{
                     setStatus({ success: false });
-                    setErrors({ submit: err.message });
                     setSubmitting(false);
                 }
             }}
@@ -136,16 +138,16 @@ export default function FormDialog() {
             onBlur={handleBlur}
           />
         <DialogActions>
-          <Button>
+          <Button onClick={handleClose}>
             <Link component={RouterLink} to="/extended-sidebar">
               <b>Cancel</b>
             </Link>
           </Button>
           <Button 
-            onClick={handleClose}
+            onClick={handleSubmit}
             startIcon={isSubmitting ? <CircularProgress size="1rem" /> : null}
             disabled={isSubmitting}
-          >Save & Audit</Button>
+          ><b>Save</b></Button>
         </DialogActions>
           </form>
             )}

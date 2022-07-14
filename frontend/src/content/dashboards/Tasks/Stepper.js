@@ -39,15 +39,18 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 
-export default function VerticalLinearStepper({fr,cr,tests}) {
+export default function VerticalLinearStepper({fr,cr,tests,deviceInfo}) {
 
   
   const [activeStep, setActiveStep] = React.useState(0);
   const [activeStep1, setActiveStep1] = React.useState(0);
   const [open, setOpen] = React.useState(false);
   // const [testsLength, setTestsLength] = React.useState([])
+  // const [deviceInfor , setDeviceInfor] = React.useState(deviceInfo)
 
-
+  // React.useEffect(() => {
+  //   setDeviceInfor(deviceInfo);
+  //  }, [deviceInfo])
   // const handleOpen = () => setOpen(true);
   // const handleClose = () => setOpen(false);
   const isMountedRef = useRefMounted();
@@ -73,26 +76,29 @@ export default function VerticalLinearStepper({fr,cr,tests}) {
   
   const handlefinished = () =>{
       // if (index === fr.length - 1 )
-        checkedList.map(async (table) => {
+        checkedList.map(async (table,index) => {
           // if(table.includes(id)){
             console.log(table)
             if (!table.includes(true)){
               //  if (!Object.values(table).includes(true)){
               let res 
               // eslint-disable-next-line no-unused-vars
-              res = await getVulnerability(table.id_cr)
+              // res = await getVulnerability(table.id_cr)
+              res = await getVulnerability(table[0])
               // console.log(res)
               // declare a variable [vulnerabilities,setVulnerabilities] = React.useState([])
               setVulnerabilities(vulnerabilities => [{...res} , ...vulnerabilities])
               // console.log("vulnerabilities : ",vulnerabilities)
  
+            }else{
+              console.log(table,index)
             }
             
             // console.log(res)
         })
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
 
-    }
+  };
 
   const handleChangeOpen = () => {
     setOpen(true);
@@ -102,13 +108,14 @@ export default function VerticalLinearStepper({fr,cr,tests}) {
     setOpen(false);
   };
 
-
   // eslint-disable-next-line no-unused-vars
-  const setTestLength = (test) => {
+  const setTestLength = (test,index_test,id_cr,index_cr) => {
     // while (i < 1){
-      if(checkedState.length === 0){
+      if(index_test === 0 && checkedState.length === 0){
+        //  && !checkedList[index_cr].includes(id_cr)
         setCheckedState(new Array(test.testsList.length).fill(false))
-        // setCheckedList(list => [new Array(test.testsList.length).fill(false),...list])
+        setCheckedList(list => [...list,[id_cr,...new Array(test.testsList.length).fill(false)]])
+        // console.log(index_cr)
         // if(index_fr === 0 && index_cr === 0){
         // console .log(index_cr, index_fr)
         // setTestsLength(testL => [...testL, test.testsList.length])
@@ -121,9 +128,9 @@ export default function VerticalLinearStepper({fr,cr,tests}) {
 
 
     // }
-  }
+  };
 
-  const handleChange = (index_test,index_cr,id_cr,event,test) => {
+  const handleChange = (index_test,index_cr,id_cr,event) => {
 
       // setCheckedState(new Array(test.testsList.length).fill(false))
 
@@ -134,14 +141,23 @@ export default function VerticalLinearStepper({fr,cr,tests}) {
         return state;}
         // i === index ? event.target.checked : state
       );
-      console.log(newChecked,test.testsList.length);
       setCheckedState(newChecked);
+      
+      // i loula tkoun egale ll index cr bch tkoun ana fel list el s7i7a 
+      // i theniya tkoun egale ll index test + 1 5ater ana zeyda l id cr 
+      // return [id_cr,...newchecked]
 
       let newCheckedList = checkedList.map((state,i) => {
-          if(i === index_cr){
-              return [id_cr,...newChecked]
-          }
-          return state
+        if(i === index_cr){
+          let newState = state.map((state1,index1) => {
+            if(index1 === index_test + 1 ){
+              return event.target.checked
+            }
+          return state1
+          })
+          return [...newState]
+        }
+        return state
       })
       setCheckedList(newCheckedList);
       
@@ -168,26 +184,22 @@ export default function VerticalLinearStepper({fr,cr,tests}) {
       behavior: "smooth",
   });
   };
+
   const handleNext1 = async (id_cr,index) => {
     // eslint-disable-next-line no-alert
-    setCheckedList(list => [[id_cr,...checkedState],...list])
+    // setCheckedList(list => [[id_cr,...checkedState],...list])
     // console.log("checkedList",checkedList);
 
-    console.log("checkedState",checkedState,index);
+    console.log("checkedState",checkedState,id_cr,index);
 
     setActiveStep1((prevActiveStep) => prevActiveStep + 1);
-    // setCheckedState([])
+    setCheckedState([])
 
     // if(!checkedState.includes(true)){
     //   await getVulnerability(id)
     // }
-    // naamel test si l id taa cr mawjoud fil grand table wela 
-    // naamel loop bel index taa l cr mawjoud
-    // 5ater l id fl table l kbir bch yji bdhbt maa l indice taa l cr mawjoud
-    // triee 
-    // nadi l index taa l cr bch naamel table[index cr].include(id_cr)
 
-   // if(checkedList && !checkedList[index].includes(id)){
+    // if(checkedList && !checkedList[index].includes(id)){
 
     // console.log(checkedList);
   };
@@ -215,9 +227,21 @@ export default function VerticalLinearStepper({fr,cr,tests}) {
             </IconButton>
           </Tooltip>
         }
-        title='Auditing your device using IEC 62443-4-2 standard'
+        title= 'Start auditing your device using IEC 62443-4-2 standard'
         />
       <Box mx={4.5}>
+        {
+          deviceInfo &&  (
+            <>
+            <Typography variant="h4">
+              <b style={{color:"red"}}>Name :</b> {deviceInfo.name} {" "} {" "} {" "} , {" "} {" "} {" "}
+              <b style={{color:"red"}}>Type :</b> {deviceInfo.type} {" "} {" "} {" "} , {" "} {" "} {" "} <br/>
+              <b style={{color:"red"}}>Manufacturer :</b> {deviceInfo.manufacturer} {" "} {" "} {" "} , {" "} {" "} {" "}
+              <b style={{color:"red"}}>Version :</b> {deviceInfo.version}
+            </Typography>
+            </>
+            )
+        }
        <Stepper activeStep={activeStep} orientation="vertical" style={{ backgroundColor : 'white' }}>
         {fr && fr.map((_fr, index_fr) => (
           <Step key={_fr.name}>
@@ -261,25 +285,27 @@ export default function VerticalLinearStepper({fr,cr,tests}) {
                               { 
 
                                 return  _cr._id === test.id_cr._id ? test.testsList.map((tst,index_test) => {
-                                   if (checkedState.length===0 && index_test === 0){
-                                    return setCheckedState(new Array(test.testsList.length).fill(false)) 
-                                   }
-                                   // setTestLength(test,index_test,index_cr,index_fr)
-                                   console.log(checkedState)
+                                  //  if (checkedState.length===0 && index_test === 0){
+                                  //   return setCheckedState(new Array(test.testsList.length).fill(false)) 
+                                  //  }
+                                  // if(index_cr === 0){
+                                    setTestLength(test,index_test,_cr._id,index_cr)
+                                  
+                                   // 5console.log(checkedState)
                                    return checkedState.length > 0 ? 
                                       <div key={index_test}><FormControlLabel
                                        // key={index}
                                          control={
                                          <Checkbox
-                                            checked={checkedState[index_test]}
-                                            onChange={(event) => handleChange(index_test,index_cr,_cr._id,event,test)}
-                                            name={tst}
+                                            checked={checkedList[index_cr][index_test + 1 ]}
+                                            onChange={(event) => handleChange(index_test,index_cr,_cr._id,event)}
+                                            name={tst[0]}
                                             // onClick={() => console.log("clicked : ",tst,checkedState[index_test])}
-                                            id={tst}
+                                            id={tst[0]}
                                             // value={tst}
                                          />
                                          }
-                                         label={tst} 
+                                         label={tst[0]} 
                                          />
                                          <Box px={1} pt={3}
                                           hidden={index_test !== test.testsList.length || checkedState.length === 0}

@@ -118,6 +118,10 @@ export default function PDFViewerGlobal ({text,vulnerabilities}){
           style={styles.image}
           src="/static/images/placeholders/covers/logo_layer8.png"
         />
+        <Image
+          style={styles.image}
+          src="/static/images/placeholders/covers/logo_.png"
+        />
         <Text style={styles.summary}> Summary of what a report is ? </Text>
 
         <Text style={styles.text}>
@@ -154,51 +158,49 @@ export default function PDFViewerGlobal ({text,vulnerabilities}){
             motivation.
         </Text>
         { vulnerabilities && vulnerabilities.map((vulnerability,index) =>
-        { 
-        return <div key={vulnerability._id}>
-
-        <Text style={styles.title__}>
-          Vulnerability N° {index + 1} details : 
-        </Text>
-
-        <Text style={styles.title_}>
-          ---------------------------------------------------------- 
-        </Text>
-                  
-        <Text style={styles.title_}>
-          CONDITION : 
-        </Text>
-
-        <Text style={styles.text_}>
-          {vulnerability.condition}
-        </Text>
-
-        <Text style={styles.title_}>
-          CAUSE : 
-        </Text>
-
-        <Text style={styles.text_}>
-          {vulnerability.cause}
-        </Text>
-
-        <Text style={styles.title_}>
-          EFFECT : 
-        </Text>
-
-        <Text style={styles.text_}>
-          {vulnerability.effect}
-        </Text>
-
-        <Text style={styles.title_}>
-          RECOMMENDATION : 
-        </Text>
-
-        <Text style={styles.text_}>
-          {vulnerability.recommendation}
-        </Text>
-        </div>                           
         
-        }
+            <div key={vulnerability._id}>
+
+            <Text style={styles.title__}>
+              Vulnerability N° {index + 1} details : 
+            </Text>
+   
+            <Text style={styles.title_}>
+              ---------------------------------------------------------- 
+            </Text>
+                      
+            <Text style={styles.title_}>
+              CONDITION : 
+            </Text>
+
+            <Text style={styles.text_}>
+              {vulnerability.condition}
+            </Text>
+
+            <Text style={styles.title_}>
+              CAUSE : 
+            </Text>
+
+            <Text style={styles.text_}>
+              {vulnerability.cause}
+            </Text>
+
+            <Text style={styles.title_}>
+              EFFECT : 
+            </Text>
+
+            <Text style={styles.text_}>
+              {vulnerability.effect}
+            </Text>
+
+            <Text style={styles.title_}>
+              RECOMMENDATION : 
+            </Text>
+
+            <Text style={styles.text_}>
+              {vulnerability.recommendation}
+            </Text>
+            </div>                           
         ) 
         }
 

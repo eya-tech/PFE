@@ -1,5 +1,4 @@
 import {
-  Box,
   Grid,
   Button,
   Card,
@@ -10,29 +9,19 @@ import {
 } from '@mui/material';
 
 import { useTranslation } from 'react-i18next';
-import Label from 'src/components/Label';
 import AssessmentTwoToneIcon from '@mui/icons-material/AssessmentTwoTone';
 import NewReleasesTwoToneIcon from '@mui/icons-material/NewReleasesTwoTone';
-import GaugeChart from 'react-gauge-chart';
 import Text from 'src/components/Text';
 // import DnsTwoToneIcon from '@mui/icons-material/DnsTwoTone';
 
-const CardActions = styled(Box)(
-  ({ theme }) => `
-    position: absolute;
-    right: ${theme.spacing(2)};
-    top: ${theme.spacing(2)};
-    z-index: 12;
-  `
-);
 
 const AvatarSuccess = styled(Avatar)(
   ({ theme }) => `
         background-color: ${theme.colors.success.main};
         margin: 0 auto;
         color: ${theme.palette.getContrastText(theme.colors.success.dark)};
-        width: ${theme.spacing(7)};
-        height: ${theme.spacing(7)};
+        width: ${theme.spacing(5)};
+        height: ${theme.spacing(5)};
         box-shadow: ${theme.colors.shadows.success};
   `
 );
@@ -42,8 +31,8 @@ const AvatarError = styled(Avatar)(
         background-color: ${theme.colors.error.main};
         margin: 0 auto;
         color: ${theme.palette.getContrastText(theme.colors.error.dark)};
-        width: ${theme.spacing(7)};
-        height: ${theme.spacing(7)};
+        width: ${theme.spacing(5)};
+        height: ${theme.spacing(5)};
         box-shadow: ${theme.colors.shadows.error};
         animation: pulse 1.2s infinite ease-in-out;
 
@@ -64,9 +53,6 @@ function Block1() {
             position: 'relative'
           }}
         >
-          <CardActions display="flex" alignItems="center">
-            <Label color="success">90%</Label>
-          </CardActions>
           <AvatarSuccess variant="rounded">
             <AssessmentTwoToneIcon />
           </AvatarSuccess>
@@ -75,7 +61,7 @@ function Block1() {
             sx={{
               pt: 3.5
             }}
-            variant="h2"
+            variant="h4"
           >
             Firmware #857
           </Typography>
@@ -86,28 +72,7 @@ function Block1() {
             </Text>{' '}
             compliance at the moment.
           </Typography>
-          <Box
-            sx={{
-              mx: 'auto',
-              mt: 3,
-              mb: 0.5,
-              maxWidth: '340px'
-            }}
-          >
-            <GaugeChart
-              hideText
-              nrOfLevels={6}
-              colors={[
-                theme.colors.error.main,
-                theme.colors.warning.main,
-                theme.colors.success.main
-              ]}
-              needleColor={theme.colors.alpha.black[50]}
-              needleBaseColor={theme.colors.alpha.black[100]}
-              arcWidth={0.3}
-              percent={0.27}
-            />
-          </Box>
+          <br/>
           <Button
             sx={{
               px: 2.5,
@@ -146,9 +111,6 @@ function Block1() {
             position: 'relative'
           }}
         >
-          <CardActions display="flex" alignItems="center">
-            <Label color="warning">36%</Label>
-          </CardActions>
           <AvatarError variant="rounded">
             <NewReleasesTwoToneIcon /> 
           </AvatarError>
@@ -157,7 +119,7 @@ function Block1() {
             sx={{
               pt: 3.5
             }}
-            variant="h2"
+            variant="h4"
           >
             Firmware #857
           </Typography>
@@ -168,24 +130,7 @@ function Block1() {
             </Text>{' '}
             vulnerabilities .
           </Typography>
-          <Box
-            sx={{
-              mx: 'auto',
-              mt: 3,
-              mb: 0.5,
-              maxWidth: '340px'
-            }}
-          >
-            <GaugeChart
-              hideText
-              nrOfLevels={6}
-              colors={[theme.colors.error.lighter, theme.colors.error.main]}
-              needleColor={theme.colors.alpha.black[50]}
-              needleBaseColor={theme.colors.alpha.black[100]}
-              arcWidth={0.3}
-              percent={0.86}
-            />
-          </Box>
+          <br/>
           <Button
             sx={{
               px: 2.5,

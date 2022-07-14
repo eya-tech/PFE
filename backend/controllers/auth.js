@@ -18,14 +18,14 @@ let transport = nodemailer.createTransport({
         user: email,
         pass: pass,
     },
-});
+}); 
 let handlebarsOptions = {
     viewEngine: {
-        extName: ".html",
+        extName: ".html", 
         partialsDir: path.resolve('../templates'),
         defaultLayout: false
     },
-    viewPath: path.resolve('../templates/'),
+    viewPath: path.resolve('../templates/'), 
     extName: '.html'
 };
 // @ts-ignore
@@ -219,10 +219,10 @@ export const signin = async (req, res, next) => {
         return
     } catch (error) {
         next(error)
-    }
-}
-
-const sendToken = (user, code, res) => {
+    } 
+} 
+  
+const sendToken = (user, code, res) => {  
     const token = user.getsignedtoken();
     res.status(code).json({ success: true, accessToken:token, role: user.role.titre,user })
 }

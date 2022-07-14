@@ -19,12 +19,12 @@ const AvatarPrimary = styled(Avatar)(
   ({ theme }) => `
         background-color: ${theme.colors.primary.main};
         color: ${theme.palette.getContrastText(theme.colors.primary.main)};
-        width: ${theme.spacing(8)};
-        height: ${theme.spacing(7)};
+        width: ${theme.spacing(5)};
+        height: ${theme.spacing(5)};
         box-shadow: ${theme.colors.shadows.primary};
-        top: -${theme.spacing(3)};
+        top: -${theme.spacing(1)};
         position: absolute;
-        left: 50%;
+        left: 20%;
         margin-left: -${theme.spacing(4.5)};
   `
 );
@@ -33,12 +33,12 @@ const AvatarError = styled(Avatar)(
   ({ theme }) => `
         background-color: ${theme.colors.error.main};
         color:  ${theme.palette.primary.contrastText};
-        width: ${theme.spacing(8)};
-        height: ${theme.spacing(7)};
+        width: ${theme.spacing(5)};
+        height: ${theme.spacing(5)};
         box-shadow: ${theme.colors.shadows.error};
-        top: -${theme.spacing(3)};
+        top: -${theme.spacing(1)};
         position: absolute;
-        left: 50%;
+        left: 20%;
         margin-left: -${theme.spacing(4.5)};
   `
 );
@@ -49,7 +49,7 @@ function Block7() {
 
   return (
     <Grid container spacing={0}>
-      <Grid item xs={12} md={4} >
+      <Grid item xs={12} md={5} >
         <Card
           sx={{
             overflow: 'visible',
@@ -71,7 +71,7 @@ function Block7() {
                 fontSize: `${theme.typography.pxToRem(40)}`
               }}
             >
-              89
+              19
             </Typography>
             <Typography
               textAlign="center"
@@ -107,7 +107,7 @@ function Block7() {
           </Box>
         </Card>
       </Grid>
-      <Grid item xs={12} md={4} ml={3}> 
+      <Grid item xs={12} md={5.5} ml={3}> 
         <Card
           sx={{
             overflow: 'visible',

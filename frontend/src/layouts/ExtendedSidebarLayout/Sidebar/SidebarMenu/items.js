@@ -1,5 +1,5 @@
 // import HealthAndSafetyTwoToneIcon from '@mui/icons-material/HealthAndSafetyTwoTone';
-import AssignmentIndTwoToneIcon from '@mui/icons-material/AssignmentIndTwoTone';
+// import AssignmentIndTwoToneIcon from '@mui/icons-material/AssignmentIndTwoTone';
 import AccountTreeTwoToneIcon from '@mui/icons-material/AccountTreeTwoTone';
 import ReceiptTwoToneIcon from '@mui/icons-material/ReceiptTwoTone';
 import SmartToyTwoToneIcon from '@mui/icons-material/SmartToyTwoTone';
@@ -30,11 +30,11 @@ const menuItems = [
   {
     heading: 'Management',
     items: [
-      {
-        name: 'Users',
-        icon: AssignmentIndTwoToneIcon,
-        link: '/extended-sidebar/management/users/list',
-      },
+      // {
+      //   name: 'Users',
+      //   icon: AssignmentIndTwoToneIcon,
+      //   link: '/extended-sidebar/management/users/list',
+      // },
       // {
       //   name: 'Projects',
       //   icon: AccountTreeTwoToneIcon,

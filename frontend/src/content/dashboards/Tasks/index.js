@@ -29,6 +29,12 @@ function DashboardTasks() {
   const [tests, setTests] = useState([]);
   const [cr, setCr] = useState([]);
   const [fr, setFr] = useState([]);
+  const [deviceInfo, setDeviceInfo] = useState({
+    name:"Device name",
+    type:"Device type",
+    manufacturer:"Device manufacturer",
+    version:"Device version"
+  });
 
   const getTests = useCallback(async () => {
     try {
@@ -72,6 +78,8 @@ function DashboardTasks() {
     getCr()
     getFr()
   }, []);
+
+
    
 
   return (
@@ -123,8 +131,9 @@ function DashboardTasks() {
                               flexDirection: 'column'
                             }}
                           >
-                        <DeviceInfo />
-                        <Stepper fr={fr} cr={cr} tests={tests} />
+                        <DeviceInfo setDeviceInfo={setDeviceInfo} />
+                        
+                        <Stepper fr={fr} cr={cr} tests={tests} deviceInfo={deviceInfo}/>
                         </Grid>
                       </Box>
                     {/* </Grid>
