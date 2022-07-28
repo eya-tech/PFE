@@ -31,6 +31,8 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    paddingBottom: 20,
+    border:3 
     // backgroundImage: 'logo_layer8.jpg', /* The image used */
     // backgroundColor: "#cccccc", /* Used if the image is unavailable */
     // height: "500px", /* You must set a specified height */
@@ -61,7 +63,7 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     color: 'red',
     width: "100%",
-  },
+ },
   header: {
     fontSize: 12,
     marginBottom: 20,
@@ -90,6 +92,13 @@ const styles = StyleSheet.create({
     paddingVertical: 30,
     color: "black"
   },
+  level: {
+    width: "100%",
+    // backgroundColor: "#f0f0f0",
+    paddingHorizontal: 50,
+    paddingVertical: 30,
+    color: "red"
+  },
   pageNumber: {
     position: 'absolute',
     fontSize: 12,
@@ -103,7 +112,7 @@ const styles = StyleSheet.create({
 
 
 
-export default function PDFViewerGlobal ({text,vulnerabilities}){
+export default function PDFViewerGlobal ({vulnerabilities,reachedLevel}){
   const MyDocument  = () =>(
     <Document>
       <Page  size="A4" style={styles.page}>
@@ -118,12 +127,12 @@ export default function PDFViewerGlobal ({text,vulnerabilities}){
           style={styles.image}
           src="/static/images/placeholders/covers/logo_layer8.png"
         />
-        <Image
+        {/* <Image
           style={styles.image}
           src="/static/images/placeholders/covers/logo_.png"
-        />
+        /> */}
         <Text style={styles.summary}> Summary of what a report is ? </Text>
-
+        
         <Text style={styles.text}>
         The concretization of an audit is materialized through a report including the various analyses
         and findings that have emerged during the audit. 
@@ -157,52 +166,48 @@ export default function PDFViewerGlobal ({text,vulnerabilities}){
             for it using sophisticated means with extended resources, IACS specific skills and high
             motivation.
         </Text>
+        <Text style={styles.level}>
+        {reachedLevel}
+        </Text>
+        <div style={styles.text}>
         { vulnerabilities && vulnerabilities.map((vulnerability,index) =>
         
-            <div key={vulnerability._id}>
-
-            <Text style={styles.title__}>
-              Vulnerability N° {index + 1} details : 
-            </Text>
-   
-            <Text style={styles.title_}>
-              ---------------------------------------------------------- 
-            </Text>
-                      
-            <Text style={styles.title_}>
-              CONDITION : 
-            </Text>
-
-            <Text style={styles.text_}>
+        <div key={index}>
+          <Text style={styles.title__}>
+            Vulnerability N° {index + 1} details:
+          </Text>
+          <Text style={styles.title_}>
+              ----------------------------------------------------------
+          </Text>
+          <Text style={styles.title_}>
+              CONDITION:
+          </Text>
+          <Text style={styles.text_}>
               {vulnerability.condition}
-            </Text>
-
-            <Text style={styles.title_}>
-              CAUSE : 
-            </Text>
-
-            <Text style={styles.text_}>
+          </Text>
+          <Text style={styles.title_}>
+              CAUSE:
+          </Text>
+          <Text style={styles.text_}>
               {vulnerability.cause}
-            </Text>
-
-            <Text style={styles.title_}>
-              EFFECT : 
-            </Text>
-
-            <Text style={styles.text_}>
+          </Text>
+          <Text style={styles.title_}>
+              EFFECT:
+          </Text>
+          <Text style={styles.text_}>
               {vulnerability.effect}
-            </Text>
-
-            <Text style={styles.title_}>
-              RECOMMENDATION : 
-            </Text>
-
-            <Text style={styles.text_}>
+          </Text>
+          <Text style={styles.title_}>
+              RECOMMENDATION:
+          </Text>
+          <Text style={styles.text_}>
               {vulnerability.recommendation}
-            </Text>
-            </div>                           
-        ) 
-        }
+          </Text>
+        </div>
+    ) 
+    }
+        </div>
+
 
         <Text style={styles.pageNumber} render={({ pageNumber, totalPages }) => (
           `${pageNumber} / ${totalPages}`
@@ -231,7 +236,7 @@ export default function PDFViewerGlobal ({text,vulnerabilities}){
     <PDFViewer width="100%" height="100%" style={{height: '690px'}}>
       <MyDocument/>
     </PDFViewer>
-    <PDFDownloadLink document={<MyDocument />} fileName="Report.pdf">
+    <PDFDownloadLink document={<MyDocument />} fileName="Audit_Report.pdf">
       {({ blob, url, loading, error }) =>
         loading ? 'Loading document...' : <Button
                                                 // sx={{ mt: 1, mr: 1 }}

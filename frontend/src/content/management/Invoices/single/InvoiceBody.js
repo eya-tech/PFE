@@ -222,7 +222,7 @@ const InvoiceBody = ({ invoice }) => {
               <br/>
             <BugReportIcon/>
                     <br/>
-                     : <br/>
+                    Condition : <br/>
                     Risk of communication spoofing because.<br/>
                     luck of authentication when accessing APIs .<br/>
                     Cause:<br/>

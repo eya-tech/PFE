@@ -31,14 +31,14 @@ export default function FormDialog({setDeviceInfo}) {
         <DialogTitle>Device Information</DialogTitle>
         <DialogContent>
           <DialogContentText style={{color: 'orange'}}>
-            To audit your device please make sure to fill in this form carefully !
+            To audit your device, please make sure to fill in this form !
           </DialogContentText>
           <Formik
             initialValues={{
-                name:"aaa",
-                type:"aaa",
-                manufacturer:"aaa",
-                version:"aaa",
+                name:"Device #5SPmk",
+                type:"Software application",
+                manufacturer:"Mr.Lkstg Htacdh",
+                version:"Version@20.5043.602",
                 submit: null
             }}
             validationSchema={Yup.object().shape({

@@ -206,7 +206,7 @@ function SidebarTopSection() {
             component={NavLink}
           >
             <AccountTreeTwoToneIcon fontSize="small" />
-            <ListItemText primary={t('Firmwares')} />
+            <ListItemText primary={t('Devices')} />
           </ListItem>
         </List>
         <Divider />

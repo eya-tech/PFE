@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable camelcase */
 import * as React from 'react';
 import Box from '@mui/material/Box';
@@ -17,8 +18,6 @@ import Slide from '@mui/material/Slide';
 import useRefMounted from 'src/hooks/useRefMounted';
 import axios from 'axios';
 
-// import CloseIcon from '@mui/icons-material/Close';
-
 import {
     CardHeader,
     IconButton,
@@ -32,75 +31,109 @@ import {
 import RefreshTwoToneIcon from '@mui/icons-material/RefreshTwoTone';
 import PDFViewerGlobal from "./PDFViewer";
 
-// import { TransitionProps } from '@mui/material/transitions';
-
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
 
 export default function VerticalLinearStepper({fr,cr,tests,deviceInfo}) {
-
   
   const [activeStep, setActiveStep] = React.useState(0);
   const [activeStep1, setActiveStep1] = React.useState(0);
   const [open, setOpen] = React.useState(false);
-  // const [testsLength, setTestsLength] = React.useState([])
-  // const [deviceInfor , setDeviceInfor] = React.useState(deviceInfo)
 
-  // React.useEffect(() => {
-  //   setDeviceInfor(deviceInfo);
-  //  }, [deviceInfo])
-  // const handleOpen = () => setOpen(true);
-  // const handleClose = () => setOpen(false);
+  const SL1 = 12;
+  const SL2 = 4;
+  const SL3 = 5;
+
+  const [slLevel, setSlLevel] = React.useState([])
+  const [reachedLevel, setReachedLevel] = React.useState()
+
+  const[counterSL1,setCounterSL1] = React.useState(0);
+  const[counterSL2,setCounterSL2] = React.useState(0);
+  const[counterSL3,setCounterSL3] = React.useState(0);
+
   const isMountedRef = useRefMounted();
 
-  // eslint-disable-next-line no-unused-vars
   const getVulnerability = React.useCallback(async (id) => {
-   // try {
       const response = await axios.get(`http://localhost:5000/vulnerability/${id}`);
-     // if (isMountedRef.current) {
-        return response.data.vulnerability
-     // }
-    //   return false ;
-    // } catch (err) {
-    //   console.error(err);
-    // }
+      return response.data.vulnerability
+
   }, [isMountedRef]);
 
-  const [vulnerabilities,setVulnerabilities] = React.useState([])
+  const [vulnerabilities, setVulnerabilities] = React.useState([])
   
   const [checkedState, setCheckedState] = React.useState([]);
-  // eslint-disable-next-line no-unused-vars
+
   const [checkedList, setCheckedList] = React.useState([]);
-  
+
+  const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
+
+  const calculateLevel = () => { 
+    slLevel.forEach(levels => 
+      {
+        setCounterSL1(counterSL1 => countOccurrences(levels,"SL1") + counterSL1)
+        setCounterSL2(counterSL2 => countOccurrences(levels,"SL2") + counterSL2)
+        setCounterSL3(counterSL3 => countOccurrences(levels,"SL3") + counterSL3)
+      }
+    )
+  };
+
+  // this.calculateLevel()
+
   const handlefinished = () =>{
-      // if (index === fr.length - 1 )
-        checkedList.map(async (table,index) => {
-          // if(table.includes(id)){
-            console.log(table)
+        checkedList.map(async (table) => {
             if (!table.includes(true)){
               //  if (!Object.values(table).includes(true)){
               let res 
-              // eslint-disable-next-line no-unused-vars
-              // res = await getVulnerability(table.id_cr)
               res = await getVulnerability(table[0])
-              // console.log(res)
-              // declare a variable [vulnerabilities,setVulnerabilities] = React.useState([])
               setVulnerabilities(vulnerabilities => [{...res} , ...vulnerabilities])
-              // console.log("vulnerabilities : ",vulnerabilities)
- 
-            }else{
-              console.log(table,index)
             }
-            
-            // console.log(res)
         })
-      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        
+        calculateLevel()
 
+        if (counterSL3 === SL3){
+          console.log("SL3",counterSL3)
+          setReachedLevel("Gongratulations, your device reached the higher security level, security level 3 is accomplished and we are working for security level 4, we will keep you updated.")
+        }
+        else 
+        if (counterSL2 === SL2){
+          console.log("SL2",counterSL2)
+          setReachedLevel("Security level 2 reached, here you find some recommendations to improve your security to reach a higher level.")
+          // async await to get recommendations to improve the SL
+        }
+        else 
+        if(counterSL1 === SL1){
+          console.log("SL1",counterSL1)
+          setReachedLevel("Security level 1 reached, here you find some recommendations to improve your security to reach a higher level.")
+        }
+        else{
+          setReachedLevel("Security level 0, there are gaps in your device, here you find the vulnerabilities found and the recommendations to fix it,in purpose to improve your security to reach a higher level.")
+        }
+
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
   const handleChangeOpen = () => {
+    if (counterSL3 === SL3){
+      console.log("SL3",counterSL3)
+      setReachedLevel("Gongratulations, your device reached the higher security level, security level 3 is accomplished and we are working for security level 4, we will keep you updated.")
+    }
+    else 
+    if (counterSL2 === SL2){
+      console.log("SL2",counterSL2)
+      setReachedLevel("Security level 2 reached, here you find some recommendations to improve your security to reach a higher level.")
+      // async await to get recommendations to improve the SL
+    }
+    else 
+    if(counterSL1 === SL1){
+      console.log("SL1",counterSL1)
+      setReachedLevel("Security level 1 reached, here you find some recommendations to improve your security to reach a higher level.")
+    }
+    else{
+      setReachedLevel("Security level 0, there are gaps in your device, here you find the vulnerabilities found and the recommendations to fix it,in purpose to improve your security to reach a higher level.")
+    }
     setOpen(true);
   };
 
@@ -108,31 +141,17 @@ export default function VerticalLinearStepper({fr,cr,tests,deviceInfo}) {
     setOpen(false);
   };
 
-  // eslint-disable-next-line no-unused-vars
   const setTestLength = (test,index_test,id_cr,index_cr) => {
-    // while (i < 1){
       if(index_test === 0 && checkedState.length === 0){
-        //  && !checkedList[index_cr].includes(id_cr)
         setCheckedState(new Array(test.testsList.length).fill(false))
-        setCheckedList(list => [...list,[id_cr,...new Array(test.testsList.length).fill(false)]])
-        // console.log(index_cr)
-        // if(index_fr === 0 && index_cr === 0){
-        // console .log(index_cr, index_fr)
-        // setTestsLength(testL => [...testL, test.testsList.length])
-        // }
-      // break
+        if(checkedList.length === 0){
+          setCheckedList(list => [...list,[id_cr,...new Array(test.testsList.length).fill(false)]])
+          setSlLevel(list => [...list,[...new Array(test.testsList.length).fill(0)]])
+        }
       }
-      // console.log("last index of point " ,test.testsList[index_test]
-                                              // .lastIndexOf("."))
-      // let level=""
-
-
-    // }
   };
 
-  const handleChange = (index_test,index_cr,id_cr,event) => {
-
-      // setCheckedState(new Array(test.testsList.length).fill(false))
+  const handleChange = (index_test,level,index_cr,id_cr,event) => {
 
       let newChecked = checkedState.map((state,i) =>
         {if(i === index_test){
@@ -142,10 +161,6 @@ export default function VerticalLinearStepper({fr,cr,tests,deviceInfo}) {
         // i === index ? event.target.checked : state
       );
       setCheckedState(newChecked);
-      
-      // i loula tkoun egale ll index cr bch tkoun ana fel list el s7i7a 
-      // i theniya tkoun egale ll index test + 1 5ater ana zeyda l id cr 
-      // return [id_cr,...newchecked]
 
       let newCheckedList = checkedList.map((state,i) => {
         if(i === index_cr){
@@ -160,12 +175,27 @@ export default function VerticalLinearStepper({fr,cr,tests,deviceInfo}) {
         return state
       })
       setCheckedList(newCheckedList);
-      
-      console.log("CheckedList",checkedList);
 
-      // l new checked ywali fi bblaset l 9dim li houwa 
-      // identifier bl index cr
-  
+      let newLevel = slLevel.map(((state2,index2) =>{
+        if(index2 === index_cr){
+          let newLevelState = state2.map(((state3,index3) =>{
+            if(index3  === index_test ){
+              // checkedList[index2][index3 + 1] === true ? level : state3
+              console.log(event.target.checked , level)
+              if(event.target.checked === true){
+                return level
+              }
+              return 0
+            }
+            return state3
+          }))
+          return [...newLevelState]
+        }
+        return state2
+      })
+        
+      )
+      setSlLevel(newLevel)
   };
 
   const handleNext = () => {
@@ -178,30 +208,18 @@ export default function VerticalLinearStepper({fr,cr,tests,deviceInfo}) {
   };
 
   const handleReset = () => {
+    setCheckedState([])
+    setCheckedList([])
     setActiveStep(0);
     window.scrollTo({
       top: 0,
       behavior: "smooth",
-  });
+    });
   };
 
   const handleNext1 = async (id_cr,index) => {
-    // eslint-disable-next-line no-alert
-    // setCheckedList(list => [[id_cr,...checkedState],...list])
-    // console.log("checkedList",checkedList);
-
-    console.log("checkedState",checkedState,id_cr,index);
-
     setActiveStep1((prevActiveStep) => prevActiveStep + 1);
     setCheckedState([])
-
-    // if(!checkedState.includes(true)){
-    //   await getVulnerability(id)
-    // }
-
-    // if(checkedList && !checkedList[index].includes(id)){
-
-    // console.log(checkedList);
   };
 
   const handleBack1 = () => {
@@ -227,21 +245,21 @@ export default function VerticalLinearStepper({fr,cr,tests,deviceInfo}) {
             </IconButton>
           </Tooltip>
         }
-        title= 'Start auditing your device using IEC 62443-4-2 standard'
+        style={{ background : 'linear-gradient(to right, #D8D8D8 50%, #BEBEBE 80%)',borderRadius : '15px' ,opacity: "0.5"}}
+        title= {deviceInfo &&  (
+          <div 
+          style={{marginLeft:'100px'}}
+          >
+          <Typography variant="h3">
+            <b style={{color:"red",textDecoration:"underline"}}>Name :</b> {deviceInfo.name} {" "} {" "} {" "} , {" "} {" "} {" "}
+            <b style={{color:"red",textDecoration:"underline"}}>Type :</b> {deviceInfo.type} {" "} {" "} {" "} , {" "} {" "} {" "} <br/>
+            <b style={{color:"red",textDecoration:"underline"}}>Manufacturer :</b> {deviceInfo.manufacturer} {" "} {" "} {" "} , {" "} {" "} {" "}
+            <b style={{color:"red",textDecoration:"underline"}}>Version :</b> {deviceInfo.version}
+          </Typography>
+          </div>
+          )}
         />
       <Box mx={4.5}>
-        {
-          deviceInfo &&  (
-            <>
-            <Typography variant="h4">
-              <b style={{color:"red"}}>Name :</b> {deviceInfo.name} {" "} {" "} {" "} , {" "} {" "} {" "}
-              <b style={{color:"red"}}>Type :</b> {deviceInfo.type} {" "} {" "} {" "} , {" "} {" "} {" "} <br/>
-              <b style={{color:"red"}}>Manufacturer :</b> {deviceInfo.manufacturer} {" "} {" "} {" "} , {" "} {" "} {" "}
-              <b style={{color:"red"}}>Version :</b> {deviceInfo.version}
-            </Typography>
-            </>
-            )
-        }
        <Stepper activeStep={activeStep} orientation="vertical" style={{ backgroundColor : 'white' }}>
         {fr && fr.map((_fr, index_fr) => (
           <Step key={_fr.name}>
@@ -285,20 +303,13 @@ export default function VerticalLinearStepper({fr,cr,tests,deviceInfo}) {
                               { 
 
                                 return  _cr._id === test.id_cr._id ? test.testsList.map((tst,index_test) => {
-                                  //  if (checkedState.length===0 && index_test === 0){
-                                  //   return setCheckedState(new Array(test.testsList.length).fill(false)) 
-                                  //  }
-                                  // if(index_cr === 0){
-                                    setTestLength(test,index_test,_cr._id,index_cr)
-                                  
-                                   // 5console.log(checkedState)
+                                   setTestLength(test,index_test,_cr._id,index_cr)
                                    return checkedState.length > 0 ? 
                                       <div key={index_test}><FormControlLabel
-                                       // key={index}
                                          control={
                                          <Checkbox
                                             checked={checkedList[index_cr][index_test + 1 ]}
-                                            onChange={(event) => handleChange(index_test,index_cr,_cr._id,event)}
+                                            onChange={(event) => handleChange(index_test,tst[1],index_cr,_cr._id,event)}
                                             name={tst[0]}
                                             // onClick={() => console.log("clicked : ",tst,checkedState[index_test])}
                                             id={tst[0]}
@@ -324,9 +335,7 @@ export default function VerticalLinearStepper({fr,cr,tests,deviceInfo}) {
                                 }
                                 ) : null
                               }
-                            )
-                            
-                            }
+                            )}
                               <Box px={1} pt={3}>
                                 <TextField
                                   label='Additional informations'
@@ -357,13 +366,6 @@ export default function VerticalLinearStepper({fr,cr,tests,deviceInfo}) {
                           >
                             Back
                           </Button>
-                          {/* <Button
-                              onClick={handleChangeOpen}
-                              sx={{ mt: 1, mr: 1 }}
-                              variant="contained"
-                            >
-                              Preview Results
-                          </Button> */}
                         </div>
                       </Box>
                     </StepContent>
@@ -405,9 +407,6 @@ export default function VerticalLinearStepper({fr,cr,tests,deviceInfo}) {
         {activeStep === fr.length && (
           <Paper square elevation={0} sx={{ p: 3 }}>
             <Typography>All steps completed - you&apos;ve finished</Typography>
-            {/* <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }} variant="contained" >
-              Generate Report
-            </Button> */}
             <Button
                onClick={handleChangeOpen}
                sx={{ mt: 1, mr: 1 }}
@@ -430,14 +429,6 @@ export default function VerticalLinearStepper({fr,cr,tests,deviceInfo}) {
                           p: 0
                         }}
                       >
-                        {/* <IconButton
-                          edge="start"
-                          color="inherit"
-                          onClick={handleChangeClose}
-                          aria-label="close"
-                        >
-                          <CloseIcon />
-                        </IconButton> */}
                         <DialogActions
                               sx={{
                                 p: 0
@@ -447,9 +438,6 @@ export default function VerticalLinearStepper({fr,cr,tests,deviceInfo}) {
                                 Exit
                               </Button>
                         </DialogActions>
-                        {/* <Typography sx={{ ml: 2 }} component="div" variant="h4" gutterBottom>
-                          Your Auditing Results
-                        </Typography> */}
                       </DialogTitle>
                             <DialogContent
                               dividers
@@ -459,19 +447,10 @@ export default function VerticalLinearStepper({fr,cr,tests,deviceInfo}) {
                             >
                               <Grid container >
                                 <Grid item xs={12}>
-                                    <PDFViewerGlobal text="hello world" vulnerabilities={vulnerabilities}/>
+                                    <PDFViewerGlobal vulnerabilities={vulnerabilities} reachedLevel={reachedLevel} />
                                 </Grid>
                               </Grid>
                             </DialogContent>
-                            {/* <DialogActions
-                              sx={{
-                                p: 1
-                              }}
-                            >
-                              <Button color="error" onClick={handleChangeClose} sx={{ mr: 4}}>
-                                Exit
-                              </Button>
-                            </DialogActions> */}
                     </Dialog>
           </Paper>
         )}

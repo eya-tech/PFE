@@ -10,6 +10,9 @@ import {
   useTheme
 } from '@mui/material';
 
+import { Link as RouterLink } from 'react-router-dom';
+import Link from '@mui/material/Link';
+
 import { useTranslation } from 'react-i18next';
 import SubscriptionsTwoToneIcon from '@mui/icons-material/SubscriptionsTwoTone';
 import BugReportTwoToneIcon from '@mui/icons-material/BugReportTwoTone';
@@ -81,7 +84,7 @@ function Block7() {
                 fontSize: `${theme.typography.pxToRem(16)}`
               }}
             >
-              {t('Total Firmwares')}
+              {t('Total Devices')}
             </Typography>
             <Divider
               sx={{
@@ -101,7 +104,9 @@ function Block7() {
                 variant="text"
                 color="info"
               >
-                {t('View firmwares list')}
+                <Link component={RouterLink} to="/extended-sidebar/management/invoices/list">
+                  <b>{t('View devices list')}</b>
+                </Link>
               </Button>
             </Box>
           </Box>

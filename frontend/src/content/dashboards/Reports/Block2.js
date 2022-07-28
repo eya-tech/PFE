@@ -63,10 +63,10 @@ function Block1() {
             }}
             variant="h4"
           >
-            Firmware #857
+            Device #H2ko6
           </Typography>
           <Typography variant="subtitle2">
-            This firmware has a{' '}
+            This device has a{' '}
             <Text color="success">
               <b>regular</b>
             </Text>{' '}
@@ -121,14 +121,14 @@ function Block1() {
             }}
             variant="h4"
           >
-            Firmware #857
+            Device #X8kp1
           </Typography>
           <Typography variant="subtitle2">
-            This firmware has a{' '}
+            This device has a{' '}
             <Text color="error">
               <b>high</b>
             </Text>{' '}
-            vulnerabilities .
+            vulnerabilities.
           </Typography>
           <br/>
           <Button
